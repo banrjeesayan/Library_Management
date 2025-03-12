@@ -35,8 +35,8 @@ exports.returnBook = async (req, res) => {
         if (borrowCheck.rowCount === 0) {
             return res.status(404).json({ message: 'Borrow record not found or already returned' });
         }
-        const result = await pool.query('UPDATE Borrowed_Books SET status = $1 WHERE id = $2 RETURNING *', ['Returned', id]);
 
+        const result = await pool.query('UPDATE Borrowed_Books SET status = $1 WHERE id = $2 RETURNING *', ['Returned', id]);
         await pool.query('UPDATE Books SET copies_available = copies_available + 1 WHERE id = $1', [borrowCheck.rows[0].book_id]);
 
         res.json({ message: 'Book returned successfully', updatedBorrow: result.rows[0] });
