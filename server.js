@@ -7,7 +7,11 @@ const app = express();
 app.use(express.json());
 
 
-
+app.use(cors({
+    origin: "*", // Allow all origins (not recommended for production)
+    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
+    allowedHeaders: ["Content-Type", "Authorization"] // Allowed headers
+}));
 
 // Import Routes
 const userRoutes = require('./routes/users');

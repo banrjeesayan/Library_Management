@@ -21,7 +21,7 @@ exports.createUser = async (req, res) => {
 
 exports.getUsers = async (req, res) => {
     try {
-        const result = await pool.query('SELECT id, name, email, role FROM Users');
+        const result = await pool.query('SELECT id, name, email, role FROM Users ORDER BY id ASC ');
         res.json(result.rows);
     } catch (error) {
         res.status(500).json({ error: error.message });
